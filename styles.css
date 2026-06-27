@@ -1372,6 +1372,12 @@ p {
     width: auto;
     object-fit: contain;
     display: block;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+.logo-img:hover {
+    filter: invert(79%) sepia(51%) saturate(549%) hue-rotate(5deg) brightness(94%) contrast(88%);
 }
 
 .footer-logo-img {
@@ -1380,5 +1386,7 @@ p {
     object-fit: contain;
     display: inline-block;
     margin-bottom: 15px;
+    filter: brightness(0) invert(1);
 }
+
 
