@@ -387,12 +387,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectBox = document.getElementById('package');
         if (selectBox) {
             // Map inputs to match select option values
-            if (packageName.includes('Silver')) {
-                selectBox.value = 'silver';
-            } else if (packageName.includes('Gold')) {
-                selectBox.value = 'gold';
-            } else if (packageName.includes('Platinum')) {
-                selectBox.value = 'platinum';
+            if (packageName.includes('Basic')) {
+                selectBox.value = 'basic';
+            } else if (packageName.includes('Premium')) {
+                selectBox.value = 'premium';
+            } else if (packageName.includes('Custom')) {
+                selectBox.value = 'custom';
             }
             
             // Trigger change event to ensure float labels update correctly
