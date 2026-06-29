@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
+    // 0. Supabase Connection Configuration
+    // ==========================================
+    const SUPABASE_URL = "https://qznvajzgwlnvzbxderls.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_vgbPqDxyGRKujAbIBHTFlA_RVTzNNcH";
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    // ==========================================
     // 1. Header Scroll Effect
     // ==========================================
     const header = document.getElementById('header');
@@ -354,16 +361,222 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Form Submit Event Handler
+    // ==========================================
+    // 7. Gujarati Numerals and Pricing Utilities
+    // ==========================================
+    const toGujaratiDigits = (num) => {
+        const gujaratiDigits = ['૦', '૧', '૨', '૩', '૪', '૫', '૬', '૭', '૮', '૯'];
+        return num.toLocaleString('en-IN').replace(/[0-9]/g, w => gujaratiDigits[+w]);
+    };
+
+    const updateCardPrice = (card) => {
+        const basePriceEl = card.querySelector('.price-val');
+        if (!basePriceEl) return;
+        const basePriceVal = parseInt(basePriceEl.getAttribute('data-base'), 10);
+        const checkboxes = card.querySelectorAll('.addon-checkbox:checked');
+        let total = basePriceVal;
+        checkboxes.forEach(cb => {
+            total += parseInt(cb.getAttribute('data-price'), 10);
+        });
+        
+        basePriceEl.classList.add('updating');
+        setTimeout(() => {
+            basePriceEl.innerText = toGujaratiDigits(total);
+            basePriceEl.classList.remove('updating');
+        }, 150);
+    };
+
+    // Addon checkbox click listener
+    document.querySelectorAll('.addon-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', (e) => {
+            const card = e.target.closest('.pricing-card');
+            if (card) {
+                updateCardPrice(card);
+                
+                // Sync dynamic summary box if this card is currently selected in form
+                const selectBox = document.getElementById('package');
+                if (selectBox && selectBox.value === card.getAttribute('data-package-id')) {
+                    updateFormSummary();
+                }
+            }
+        });
+    });
+
+    // Form summary update helper
+    const updateFormSummary = () => {
+        const packageSelect = document.getElementById('package');
+        const summaryBox = document.getElementById('bookingSummaryBox');
+        
+        if (!packageSelect || !summaryBox) return;
+        
+        const selectedPackageId = packageSelect.value;
+        if (!selectedPackageId) {
+            summaryBox.style.display = 'none';
+            return;
+        }
+        
+        const card = document.querySelector(`.pricing-card[data-package-id="${selectedPackageId}"]`);
+        if (!card) {
+            summaryBox.style.display = 'none';
+            return;
+        }
+        
+        const packageName = card.querySelector('.pricing-header h3').innerText;
+        const basePriceEl = card.querySelector('.price-val');
+        if (!basePriceEl) return;
+        const basePrice = parseInt(basePriceEl.getAttribute('data-base'), 10);
+        const checkboxes = card.querySelectorAll('.addon-checkbox:checked');
+        
+        let total = basePrice;
+        let selectedAddonsList = [];
+        
+        checkboxes.forEach(cb => {
+            const price = parseInt(cb.getAttribute('data-price'), 10);
+            total += price;
+            selectedAddonsList.push({
+                label: cb.getAttribute('data-label'),
+                price: price
+            });
+        });
+        
+        let summaryHTML = `
+            <h4>પસંદગીની વિગત</h4>
+            <ul>
+                <li><i class="fas fa-check-circle"></i> <strong>પેકેજ:</strong> ${packageName} (₹${toGujaratiDigits(basePrice)})</li>
+        `;
+        
+        if (selectedAddonsList.length > 0) {
+            selectedAddonsList.forEach(item => {
+                summaryHTML += `<li><i class="fas fa-plus-circle"></i> <strong>એડ-ઓન:</strong> ${item.label} (+₹${toGujaratiDigits(item.price)})</li>`;
+            });
+        }
+        
+        summaryHTML += `
+            </ul>
+            <div class="summary-total">
+                <span>કુલ કિંમત:</span>
+                <span>₹${toGujaratiDigits(total)}</span>
+            </div>
+        `;
+        
+        summaryBox.innerHTML = summaryHTML;
+        summaryBox.style.display = 'block';
+        
+        // Update message field pre-fill
+        const messageTextarea = document.getElementById('message');
+        if (messageTextarea) {
+            const addonText = selectedAddonsList.map(a => a.label).join(', ');
+            const formattedMsg = `પસંદ કરેલ પેકેજ: ${packageName}\nવધારાની સેવાઓ (Add-ons): ${addonText || 'કોઈ નહીં'}\nકુલ અંદાજિત કિંમત: ₹${toGujaratiDigits(total)}`;
+            
+            if (!messageTextarea.value || messageTextarea.value.startsWith('પસંદ કરેલ પેકેજ:')) {
+                messageTextarea.value = formattedMsg;
+                messageTextarea.dispatchEvent(new Event('input'));
+            }
+        }
+    };
+
+    const packageSelect = document.getElementById('package');
+    if (packageSelect) {
+        packageSelect.addEventListener('change', updateFormSummary);
+    }
+
+    // Form Submit Event Handler using Supabase
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             if (validateForm()) {
-                // Show success panel inside the form box
-                if (successMsgPanel) {
-                    successMsgPanel.classList.add('show');
+                const submitBtn = document.getElementById('submitBtn');
+                if (submitBtn) {
+                    submitBtn.classList.add('loading');
+                    const btnText = submitBtn.querySelector('span');
+                    if (btnText) btnText.style.visibility = 'hidden';
+                    const btnIcon = submitBtn.querySelector('i');
+                    if (btnIcon) btnIcon.style.visibility = 'hidden';
                 }
+
+                // Gather details
+                const name = nameInput.value.trim();
+                const phone = phoneInput.value.trim();
+                const email = emailInput.value.trim() || null;
+                const eventDate = dateInput.value;
+                const eventType = typeInput.value;
+                const packageId = packageSelect.value;
+                
+                let packageName = '';
+                let addonsString = '';
+                let totalPriceStr = '';
+                
+                if (packageId) {
+                    const card = document.querySelector(`.pricing-card[data-package-id="${packageId}"]`);
+                    if (card) {
+                        packageName = card.querySelector('.pricing-header h3').innerText;
+                        const basePriceEl = card.querySelector('.price-val');
+                        if (basePriceEl) {
+                            const basePrice = parseInt(basePriceEl.getAttribute('data-base'), 10);
+                            const checkedBoxes = card.querySelectorAll('.addon-checkbox:checked');
+                            
+                            let total = basePrice;
+                            let addonsList = [];
+                            checkedBoxes.forEach(cb => {
+                                total += parseInt(cb.getAttribute('data-price'), 10);
+                                addonsList.push(cb.getAttribute('data-label'));
+                            });
+                            
+                            addonsString = addonsList.join(', ');
+                            totalPriceStr = `₹${toGujaratiDigits(total)}`;
+                        }
+                    }
+                }
+                
+                const message = document.getElementById('message').value.trim();
+
+                // Save to Supabase
+                supabaseClient
+                    .from('bookings')
+                    .insert([
+                        {
+                            name: name,
+                            phone: phone,
+                            email: email,
+                            event_date: eventDate,
+                            event_type: eventType,
+                            package: packageName,
+                            addons: addonsString,
+                            message: message,
+                            total_price: totalPriceStr
+                        }
+                    ])
+                    .then(({ error }) => {
+                        // Reset button state
+                        if (submitBtn) {
+                            submitBtn.classList.remove('loading');
+                            const btnText = submitBtn.querySelector('span');
+                            if (btnText) btnText.style.visibility = 'visible';
+                            const btnIcon = submitBtn.querySelector('i');
+                            if (btnIcon) btnIcon.style.visibility = 'visible';
+                        }
+
+                        if (error) {
+                            console.error("Supabase insert error:", error);
+                            alert("બુકિંગ સબમિટ કરવામાં ભૂલ આવી છે: " + (error.message || "ડેટાબેઝ એરર"));
+                        } else {
+                            if (successMsgPanel) {
+                                successMsgPanel.classList.add('show');
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Supabase request failed:", err);
+                        if (submitBtn) {
+                            submitBtn.classList.remove('loading');
+                            const btnText = submitBtn.querySelector('span');
+                            if (btnText) btnText.style.visibility = 'visible';
+                            const btnIcon = submitBtn.querySelector('i');
+                            if (btnIcon) btnIcon.style.visibility = 'visible';
+                        }
+                        alert("નેટવર્ક કનેક્શન પ્રોબ્લેમ છે. કૃપા કરીને ફરી પ્રયાસ કરો.");
+                    });
             }
         });
     }
@@ -375,6 +588,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (bookingForm) {
             bookingForm.reset();
+            const summaryBox = document.getElementById('bookingSummaryBox');
+            if (summaryBox) summaryBox.style.display = 'none';
             // Reset placeholders-active class styling
             inputs.forEach(input => {
                 if (input) setValid(input);
@@ -383,19 +598,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Package auto-selector helper function
-    window.selectPackage = (packageName) => {
+    window.selectPackage = (packageId) => {
         const selectBox = document.getElementById('package');
         if (selectBox) {
-            // Map inputs to match select option values
-            if (packageName.includes('Basic')) {
-                selectBox.value = 'basic';
-            } else if (packageName.includes('Premium')) {
-                selectBox.value = 'premium';
-            } else if (packageName.includes('Custom')) {
-                selectBox.value = 'custom';
-            }
-            
-            // Trigger change event to ensure float labels update correctly
+            // Options match the string IDs direct: 'silver', 'gold', 'platinum'
+            selectBox.value = packageId;
             selectBox.dispatchEvent(new Event('change'));
             
             // Smooth scroll down to contact section
