@@ -27,7 +27,8 @@
     <header class="main-header" id="header">
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="images/Logo.png" alt="PARESH KANANI PHOTOGRAPHY" class="logo-img">
+                <span class="gold-text">PARESH</span> KANANI
+                <small>PHOTOGRAPHY</small>
             </a>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
                 <i class="fas fa-bars"></i>
@@ -74,18 +75,18 @@
                     <img src="images/portrait.png" alt="Paresh Kanani Portrait" class="about-img">
                 </div>
                 <div class="about-details">
-                    <h5 class="section-subtitle">મારા વિશે</h5>
+                    <h5 class="section-subtitle">પરિચય</h5>
                     <h2 class="section-title">હું <span class="gold-text">પરેશ કાનાણી</span> છું</h2>
                     <p class="lead-text">છેલ્લા ૮ વર્ષથી લગ્નોની સુંદર ક્ષણો અને ઉત્સાહને પોતાના કેમેરામાં કેદ કરતો પ્રોફેશનલ ફોટોગ્રાફર.</p>
                     <p class="about-text">મને લગ્નની ધમાલ, હસતા ચહેરાઓ, વિદાયના આંસુ અને બે પરિવારોના અનોખા મિલનની ક્ષણોને કેદ કરવાનો અનેરો આનંદ આવે છે. મારું માનવું છે કે દરેક લગ્ન એક અનોખી પ્રેમ કહાની છે અને તેને તેટલી જ સુંદરતાથી કેમેરામાં ઉતારવી એ મારી કળા છે.</p>
                     
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <span class="stat-number">૫૦૦+</span>
-                            <span class="stat-label">વેડિંગ પ્રોજેક્ટ</span>
+                            <span class="stat-number">૧૫૦+</span>
+                            <span class="stat-label">સફળ લગ્નો</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-number">૧૫+</span>
+                            <span class="stat-number">૮+</span>
                             <span class="stat-label">વર્ષનો અનુભવ</span>
                         </div>
                         <div class="stat-item">
@@ -196,39 +197,172 @@
     <section id="services" class="services-section section-padding">
         <div class="container">
             <div class="section-header text-center">
-
-                <h2 class="section-title">સર્વિસિસ અને <span class="gold-text">પેકેજીસ</span></h2>
+                <h5 class="section-subtitle">સર્વિસિસ અને પેકેજીસ</h5>
+                <h2 class="section-title">અમારી બજેટ-ફ્રેન્ડલી <span class="gold-text">ઓફર્સ</span></h2>
                 <div class="divider"></div>
             </div>
 
             <div class="grid grid-3 pricing-table">
-                <!-- Package 1: Basic Package -->
-                <div class="pricing-card">
-                    <div class="pricing-header" style="padding-bottom: 20px;">
-                        <h3>Basic Package</h3>
+                <!-- Package 1: Silver -->
+                <div class="pricing-card" data-package-id="silver">
+                    <div class="pricing-header">
+                        <h3>સિલ્વર પેકેજ</h3>
+                        <div class="price"><span class="currency">₹</span><span class="price-val" data-base="25000">૨૫,૦૦૦</span><span class="period">/ દિવસ</span></div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul>
+                            <li><i class="fas fa-check"></i> ૧ પ્રોફેશનલ ફોટોગ્રાફર</li>
+                            <li><i class="fas fa-check"></i> કેન્ડિડ + ટ્રેડિશનલ કવરેજ</li>
+                            <li><i class="fas fa-check"></i> ૨૫૦+ એડિટ કરેલા ફોટા</li>
+                            <li><i class="fas fa-check"></i> પેનડ્રાઇવમાં ડિજિટલ ડિલિવરી</li>
+                        </ul>
+                        <div class="addons-container">
+                            <h4 class="addons-title">વધારાની સેવાઓ (Add-ons)</h4>
+                            <div class="addons-list">
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="15000" data-label="પ્રી-વેડિંગ શૂટ">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">પ્રી-વેડિંગ શૂટ <span class="addon-cost">+₹૧૫,૦૦૦</span></span>
+                                </label>
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="20000" data-label="સિનેમેટિક વિડિયો">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">સિનેમેટિક વિડિયો <span class="addon-cost">+₹૨૦,૦૦૦</span></span>
+                                </label>
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="10000" data-label="ડ્રોન કેમેરા શૂટ">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">ડ્રોન કેમેરા શૂટ <span class="addon-cost">+₹૧૦,૦૦૦</span></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="pricing-footer">
-                        <a href="#contact" class="btn btn-outline" onclick="selectPackage('Basic Package')">પસંદ કરો</a>
+                        <a href="#contact" class="btn btn-outline" onclick="selectPackage('silver')">પસંદ કરો</a>
                     </div>
                 </div>
 
-                <!-- Package 2: Premium Package -->
-                <div class="pricing-card popular">
-                    <div class="pricing-header" style="padding-bottom: 20px;">
-                        <h3>Premium Package</h3>
+                <!-- Package 2: Gold (Popular) -->
+                <div class="pricing-card popular" data-package-id="gold">
+                    <div class="popular-tag">સૌથી લોકપ્રિય</div>
+                    <div class="pricing-header">
+                        <h3>ગોલ્ડ પેકેજ</h3>
+                        <div class="price"><span class="currency">₹</span><span class="price-val" data-base="55000">૫૫,૦૦૦</span><span class="period">/ દિવસ</span></div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul>
+                            <li><i class="fas fa-check"></i> ૨ પ્રોફેશનલ ફોટોગ્રાફર્સ</li>
+                            <li><i class="fas fa-check"></i> ૧ સિનેમેટોગ્રાફર (વિડિયો શૂટર)</li>
+                            <li><i class="fas fa-check"></i> ૪ કલાકનું પ્રી-વેડિંગ શૂટ</li>
+                            <li><i class="fas fa-check"></i> ૫૦૦+ એડિટ કરેલા ફોટા</li>
+                            <li><i class="fas fa-check"></i> ૧ પ્રીમિયમ વેડિંગ આલ્બમ (ફોટો બુક)</li>
+                            <li><i class="fas fa-check"></i> ટીઝર વિડિયો + લગ્ન ફિલ્મ (Full HD)</li>
+                        </ul>
+                        <div class="addons-container">
+                            <h4 class="addons-title">વધારાની સેવાઓ (Add-ons)</h4>
+                            <div class="addons-list">
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="10000" data-label="ડ્રોન કેમેરા શૂટ">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">ડ્રોન કેમેરા શૂટ <span class="addon-cost">+₹૧૦,૦૦૦</span></span>
+                                </label>
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="8000" data-label="વધારાનો પ્રીમિયમ એલબમ">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">વધારાનો પ્રીમિયમ એલબમ <span class="addon-cost">+₹૮,૦૦૦</span></span>
+                                </label>
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="12000" data-label="4K વિડિયો અપગ્રેડ">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">4K વિડિયો અપગ્રેડ <span class="addon-cost">+₹૧૨,૦૦૦</span></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="pricing-footer">
-                        <a href="#contact" class="btn btn-primary" onclick="selectPackage('Premium Package')">હમણાં જ બુક કરો</a>
+                        <a href="#contact" class="btn btn-primary" onclick="selectPackage('gold')">હમણાં જ બુક કરો</a>
                     </div>
                 </div>
 
-                <!-- Package 3: Custom Packages -->
-                <div class="pricing-card">
-                    <div class="pricing-header" style="padding-bottom: 20px;">
-                        <h3>Custom Packages</h3>
+                <!-- Package 3: Platinum -->
+                <div class="pricing-card" data-package-id="platinum">
+                    <div class="pricing-header">
+                        <h3>પ્લેટિનમ પેકેજ</h3>
+                        <div class="price"><span class="currency">₹</span><span class="price-val" data-base="95000">૯૫,૦૦૦</span><span class="period">/ દિવસ</span></div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul>
+                            <li><i class="fas fa-check"></i> ૩ મુખ્ય ફોટોગ્રાફર્સ (ડ્રોન કેમેરા સાથે)</li>
+                            <li><i class="fas fa-check"></i> ૨ સિનેમેટોગ્રાફર્સ (4K વિડિયો)</li>
+                            <li><i class="fas fa-check"></i> આખો દિવસ પ્રી-વેડિંગ શૂટ (આઉટડોર)</li>
+                            <li><i class="fas fa-check"></i> અમર્યાદિત ફોટા (બધા કલર કરેલા)</li>
+                            <li><i class="fas fa-check"></i> ૨ લક્ઝરી વેડિંગ આલ્બમ્સ</li>
+                            <li><i class="fas fa-check"></i> સિનેમેટિક ફિલ્મ + આલ્બમ ડિજिटल લિંક</li>
+                        </ul>
+                        <div class="addons-container">
+                            <h4 class="addons-title">વધારાની સેવાઓ (Add-ons)</h4>
+                            <div class="addons-list">
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="25000" data-label="લાઇવ એલઈડી વોલ">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">લાઇવ એલઈડી વોલ <span class="addon-cost">+₹૨૫,૦૦૦</span></span>
+                                </label>
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="8000" data-label="વધારાનો ફોટોગ્રાફર">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">વધારાનો ફોટોગ્રાફર <span class="addon-cost">+₹૮,૦૦૦</span></span>
+                                </label>
+                                <label class="addon-item">
+                                    <input type="checkbox" class="addon-checkbox" data-price="30000" data-label="વિદેશ પ્રવાસ શૂટ અપગ્રેડ">
+                                    <span class="custom-checkbox"></span>
+                                    <span class="addon-text">વિદેશ પ્રવાસ શૂટ અપગ્રેડ <span class="addon-cost">+₹૩૦,૦૦૦</span></span>
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="pricing-footer">
-                        <a href="#contact" class="btn btn-outline" onclick="selectPackage('Custom Packages')">પસંદ કરો</a>
+                        <a href="#contact" class="btn btn-outline" onclick="selectPackage('platinum')">પસંદ કરો</a>
+                    </div>
+                </div>
+            </div>ar">
+                    <div class="popular-tag">સૌથી લોકપ્રિય</div>
+                    <div class="pricing-header">
+                        <h3>ગોલ્ડ પેકેજ</h3>
+                        <div class="price"><span class="currency">₹</span>૫૫,૦૦૦<span class="period">/ દિવસ</span></div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul>
+                            <li><i class="fas fa-check"></i> ૨ પ્રોફેશનલ ફોટોગ્રાફર્સ</li>
+                            <li><i class="fas fa-check"></i> ૧ સિનેમેટોગ્રાફર (વિડિયો શૂટર)</li>
+                            <li><i class="fas fa-check"></i> ૪ કલાકનું પ્રી-વેડિંગ શૂટ</li>
+                            <li><i class="fas fa-check"></i> ૫૦૦+ એડિટ કરેલા ફોટા</li>
+                            <li><i class="fas fa-check"></i> ૧ પ્રીમિયમ વેડિંગ આલ્બમ (ફોટો બુક)</li>
+                            <li><i class="fas fa-check"></i> ટીઝર વિડિયો + લગ્ન ફિલ્મ (Full HD)</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <a href="#contact" class="btn btn-primary" onclick="selectPackage('ગોલ્ડ પેકેજ (Gold Package)')">હમણાં જ બુક કરો</a>
+                    </div>
+                </div>
+
+                <!-- Package 3: Platinum -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>પ્લેટિનમ પેકેજ</h3>
+                        <div class="price"><span class="currency">₹</span>૯૫,૦૦૦<span class="period">/ દિવસ</span></div>
+                    </div>
+                    <div class="pricing-body">
+                        <ul>
+                            <li><i class="fas fa-check"></i> ૩ મુખ્ય ફોટોગ્રાફર્સ (ડ્રોન કેમેરા સાથે)</li>
+                            <li><i class="fas fa-check"></i> ૨ સિનેમેટોગ્રાફર્સ (4K વિડિયો)</li>
+                            <li><i class="fas fa-check"></i> આખો દિવસ પ્રી-વેડિંગ શૂટ (આઉટડોર)</li>
+                            <li><i class="fas fa-check"></i> અમર્યાદિત ફોટા (બધા કલર કરેલા)</li>
+                            <li><i class="fas fa-check"></i> ૨ લક્ઝરી વેડિંગ આલ્બમ્સ</li>
+                            <li><i class="fas fa-check"></i> સિનેમેટિક ફિલ્મ + આલ્બમ ડિજિટલ લિંક</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-footer">
+                        <a href="#contact" class="btn btn-outline" onclick="selectPackage('પ્લેટિનમ પેકેજ (Platinum Package)')">પસંદ કરો</a>
                     </div>
                 </div>
             </div>
@@ -254,8 +388,8 @@
                             <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                             <p class="testimonial-text">"પરેશભાઈએ અમારા લગ્નના જે ફોટોસ લીધા છે તે અદ્ભુત છે! ખાસ કરીને કેન્ડિડ ક્ષણો જે રીતે કેમેરામાં કેદ કરી છે, તે જોઈને આખા પરિવારના ચહેરા પર ખુશી આવી ગઈ. પ્લેટિનમ પેકેજની દરેક સેવા શ્રેષ્ઠ હતી."</p>
                             <div class="client-info">
-                                <h4 class="client-name">Krishna &amp; Darshit</h4>
-                                <span class="client-event">Wedding - Surat</span>
+                                <h4 class="client-name">હાર્દિક અને હેતલ પટેલ</h4>
+                                <span class="client-event">વેડિંગ શૂટ - અમદાવાદ</span>
                             </div>
                         </div>
                     </div>
@@ -266,8 +400,8 @@
                             <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                             <p class="testimonial-text">"ખૂબ જ નમ્ર સ્વભાવ અને વ્યવસાયિક કામ! પ્રી-વેડિંગ શૂટ માટે જે જગ્યાઓની પસંદગી કરી અને જે એન્ગલથી ફોટોસ લીધા, તે બધાને ખૂબ જ ગમ્યા. હું વેડિંગ ફોટોગ્રાફી માટે પરેશ કાનાણીની જ ભલામણ કરીશ."</p>
                             <div class="client-info">
-                                <h4 class="client-name">Nil &amp; Tanvi</h4>
-                                <span class="client-event">Ring Ceremony - Surat</span>
+                                <h4 class="client-name">મિતેશ અને પાયલ શાહ</h4>
+                                <span class="client-event">પ્રી-વેડિંગ શૂટ - વડોદરા</span>
                             </div>
                         </div>
                     </div>
@@ -278,8 +412,8 @@
                             <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
                             <p class="testimonial-text">"અમારા ઘરમાં જ્યારે વિડિયો અને આલ્બમ આવ્યા, ત્યારે અમે ફરીથી આખું લગ્ન જીવી લીધું. વિડિયો એડિટિંગ અને ટ્રેક મ્યુઝિકનું કલેક્શન લાજવાબ છે. થેન્ક યુ પરેશભાઈ અને ટીમ!"</p>
                             <div class="client-info">
-                                <h4 class="client-name">Deep &amp; Dhruvi</h4>
-                                <span class="client-event">Ring Ceremony - Mahuva</span>
+                                <h4 class="client-name">રાહુલ અને નેહા સવાણી</h4>
+                                <span class="client-event">વેડિંગ અને રિસેપ્શન - સુરત</span>
                             </div>
                         </div>
                     </div>
@@ -315,7 +449,7 @@
                             <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
                             <div class="method-details">
                                 <span>ફોન નંબર</span>
-                                <a href="tel:+919624045680">+91 96240 45680</a>
+                                <a href="tel:+919876543210">+91 98765 43210</a>
                             </div>
                         </div>
 
@@ -323,7 +457,7 @@
                             <div class="icon-box"><i class="fas fa-envelope"></i></div>
                             <div class="method-details">
                                 <span>ઈમેઈલ આઈડી</span>
-                                <a href="mailto:sahajphoto680@gmail.com">sahajphoto680@gmail.com</a>
+                                <a href="mailto:info@pareshkananiphoto.com">info@pareshkananiphoto.com</a>
                             </div>
                         </div>
 
@@ -331,7 +465,7 @@
                             <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
                             <div class="method-details">
                                 <span>ઓફિસનું સરનામું</span>
-                                <p>127, Atlanta Mall, opp. Tulsi Residency, Sudama Chowk, Mota Varachha, Surat - 394101</p>
+                                <p>૧૦૨, ગોલ્ડ પ્લાઝા, વરાછા રોડ, સુરત, ગુજરાત - ૩૯૫૦૦૬</p>
                             </div>
                         </div>
                     </div>
@@ -391,12 +525,15 @@
                         <div class="form-group">
                             <select id="package" name="package">
                                 <option value="" disabled selected hidden>પેકેજ પસંદ કરો (વૈકલ્પિક)</option>
-                                <option value="basic">Basic Package</option>
-                                <option value="premium">Premium Package</option>
-                                <option value="custom">Custom Packages</option>
+                                <option value="silver">સિલ્વર પેકેજ (₹૨૫,૦૦૦)</option>
+                                <option value="gold">ગોલ્ડ પેકેજ (₹૫૫,૦૦૦)</option>
+                                <option value="platinum">પ્લેટિનમ પેકેજ (₹૯૫,૦૦૦)</option>
                             </select>
                             <label for="package">પસંદગીનું પેકેજ</label>
                         </div>
+
+                        <!-- Dynamic Booking Summary Box -->
+                        <div class="booking-summary-box" id="bookingSummaryBox" style="display: none;"></div>
 
                         <div class="form-group">
                             <textarea id="message" name="message" rows="4" placeholder="તમારો ખાસ સંદેશો અથવા વિગત અહીં લખો..."></textarea>
@@ -436,7 +573,8 @@
     <footer class="main-footer">
         <div class="container text-center">
             <div class="footer-logo">
-                <img src="images/Logo.png" alt="PARESH KANANI PHOTOGRAPHY" class="footer-logo-img">
+                <h2><span class="gold-text">PARESH</span> KANANI</h2>
+                <p>WEDDING PHOTOGRAPHER</p>
             </div>
             <div class="footer-links">
                 <a href="#home">હોમ</a>
@@ -450,6 +588,8 @@
         </div>
     </footer>
 
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Custom JS -->
     <script src="app.js"></script>
 </body>
