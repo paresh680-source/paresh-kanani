@@ -1367,22 +1367,202 @@ p {
     }
 }
 
-.logo-img {
-    max-height: 95px;
-    width: auto;
-    object-fit: contain;
-    display: block;
-    filter: brightness(0) invert(1);
+/* ====================================================
+   Paresh Kanani Photography - Dynamic Pricing & Add-ons
+   ==================================================== */
+
+.addons-container {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(212, 175, 55, 0.2);
 }
 
-.footer-logo-img {
-    max-height: 140px;
-    width: auto;
-    object-fit: contain;
-    display: inline-block;
+.addons-title {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-color);
     margin-bottom: 15px;
-    filter: brightness(0) invert(1);
+    font-weight: 600;
 }
 
+.addons-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
+.addon-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    transition: var(--transition);
+    padding: 4px 0;
+}
+
+.addon-item:hover {
+    color: var(--text-white);
+}
+
+.addon-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.custom-checkbox {
+    position: relative;
+    height: 18px;
+    width: 18px;
+    background-color: transparent;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 3px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.addon-item:hover .custom-checkbox {
+    border-color: var(--primary-color);
+}
+
+/* Checked state */
+.addon-checkbox:checked ~ .custom-checkbox {
+    background: var(--gold-gradient);
+    border-color: transparent;
+}
+
+/* Checkmark check icon */
+.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2.5px;
+    width: 4px;
+    height: 8px;
+    border: solid #111;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.addon-checkbox:checked ~ .custom-checkbox::after {
+    display: block;
+}
+
+.addon-text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.addon-cost {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Price dynamic updates micro-animation */
+.price-val {
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+}
+
+.price-val.updating {
+    transform: scale(1.08);
+    opacity: 0.85;
+    color: var(--primary-color);
+}
+
+/* Booking summary box in the Form */
+.booking-summary-box {
+    background-color: rgba(212, 175, 55, 0.04);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 16px;
+    margin-bottom: 30px;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.booking-summary-box h4 {
+    font-size: 0.95rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.booking-summary-box ul {
+    list-style: none;
+    margin-bottom: 12px;
+    padding-left: 0;
+}
+
+.booking-summary-box li {
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-gray);
+}
+
+.booking-summary-box li i {
+    color: var(--primary-color);
+    font-size: 0.75rem;
+}
+
+.booking-summary-box .summary-total {
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    padding-top: 10px;
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--text-white);
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+
+/* Submit Button Loading Spinner */
+.btn-block.loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-block.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -10px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #111;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 
